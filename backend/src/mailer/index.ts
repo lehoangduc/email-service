@@ -1,0 +1,6 @@
+export { MAILER_OPTIONS } from './constants/mailer.constant'
+export { MailerOptions } from './interfaces/mailer-options.interface'
+export { MailerOptionsFactory } from './interfaces/mailer-options-factory.interface'
+export { SendMailOptions } from './interfaces/send-mail-options.interface'
+export { MailerService } from './mailer.service'
+export { MailerModule } from './mailer.module'

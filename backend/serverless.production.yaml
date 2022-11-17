@@ -1,0 +1,38 @@
+service: email-service
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-api-gateway-throttling
+  - serverless-offline
+
+provider:
+  name: aws
+  stage: production
+  region: ap-southeast-1
+
+  ecr:
+    images:
+      email-service:
+        path: ./
+        platform: linux/arm64
+
+custom:
+  apiGatewayThrottling:
+    maxRequestsPerSecond: 100
+    maxConcurrentRequests: 200
+
+functions:
+  index:
+    image:
+      name: email-service
+    architecture: arm64
+    memorySize: 300
+    timeout: 20
+    logRetentionInDays: 1
+    events:
+      - http:
+          method: any
+          path: /{proxy+}
+          cors: true
